@@ -38,9 +38,8 @@
 ........................................................................................................................................................................
 
 
-## OBJETIVO: Desarrollo de una Aplicación de Gestión de Empleados
-
-
+## OBJETIVO: Aplicación de Gestión de Turnos
+El objetivo de esta prueba es evaluar tus conocimientos en Java y Java Web, incluyendo sintaxis, estructuras repetitivas, estructuras selectivas, manejo de colecciones y operaciones CRUD (Crear, Leer, Actualizar y Borrar) utilizando JPA (Java Persistence API)  para interactuar con una base de datos, JSP para interactuar con el usuario y programación funcional como complemento.
 
 ## Descripción de la Aplicación:
 
