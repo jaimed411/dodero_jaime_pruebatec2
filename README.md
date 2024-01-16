@@ -1,6 +1,6 @@
 <p align="center">
-  <img src="https://github.com/jaimed411/dodero_jaime_pruebatec1/blob/main/pruebatec2.jpg" alt="foto">
-</p>
+  <img src="https://github.com/jaimed411/dodero_jaime_pruebatec2/blob/main/pruebatec2.jpg" alt="foto">
+</p> 
 
 ## OBJECTIVE: Employee Management Application Development
 
