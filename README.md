@@ -43,7 +43,7 @@ The application uses JPA (Java Persistence API) for data persistence. The config
 El objetivo de esta prueba es evaluar tus conocimientos en Java y Java Web, incluyendo sintaxis, estructuras repetitivas, estructuras selectivas, manejo de colecciones y operaciones CRUD (Crear, Leer, Actualizar y Borrar) utilizando JPA (Java Persistence API)  para interactuar con una base de datos, JSP para interactuar con el usuario y programación funcional como complemento.
 
 ## Descripción de la Aplicación:
-La aplicación "IWWII Gallery Reservas" es una plataforma de gestión de reservas de turnos para diversas exposiciones en la galería de arte IWWII. La aplicación ofrece un menú para registrar usuarios y un panel de control que permite a los usuarios realizar reservas, visualizar todas las reservas realizadas y filtrar las reservas por fecha y estado.
+La aplicación "IWWII Gallery Reservas" es una plataforma de gestión de reservas de turnos para diversas exposiciones en la galería de arte IWWII. Son exposiciones individuales en turno de mañana. La aplicación ofrece un menú para registrar usuarios y un panel de control que permite a los usuarios realizar reservas, visualizar todas las reservas realizadas y filtrar las reservas por fecha y estado.
 
 ## Requisitos previos:
 - Entorno de Desarrollo: Asegúrate de tener un entorno de desarrollo Java configurado, como Eclipse o IntelliJ IDEA.
