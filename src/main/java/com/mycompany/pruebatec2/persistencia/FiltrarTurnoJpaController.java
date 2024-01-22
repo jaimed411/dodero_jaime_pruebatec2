@@ -4,45 +4,42 @@ package com.mycompany.pruebatec2.persistencia;
 
 import com.mycompany.pruebatec2.exceptions.NonexistentEntityException;
 import com.mycompany.pruebatec2.logica.Turno;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
-import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 public class FiltrarTurnoJpaController {
 
+    // Factoría de EntityManager para gestionar la persistencia
     private final EntityManagerFactory emf;
 
+    // Constructor que inicializa la factoría de EntityManager
     public FiltrarTurnoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
-    FiltrarTurnoJpaController() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+    // Método para obtener un EntityManager
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
+    // Método para encontrar Turnos por fecha
     public List<Turno> findTurnoEntitiesByFecha(String fecha) {
         EntityManager em = getEntityManager();
         try {
-            // Ajusta la consulta según tu entidad y atributos
             TypedQuery<Turno> query = em.createQuery("SELECT t FROM Turno t WHERE t.fecha = :fecha", Turno.class);
-            // Asegúrate de que la variable fecha sea de tipo Date
             return query.getResultList();
         } finally {
             em.close();
         }
     }
 
+    // Método para crear un nuevo Turno
     public void create(Turno turno) {
         EntityManager em = null;
         try {
@@ -57,6 +54,7 @@ public class FiltrarTurnoJpaController {
         }
     }
 
+    // Método para editar un Turno existente
     public void edit(Turno turno) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
@@ -80,6 +78,7 @@ public class FiltrarTurnoJpaController {
         }
     }
 
+    // Método para destruir un Turno existente
     public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -101,14 +100,17 @@ public class FiltrarTurnoJpaController {
         }
     }
 
+    // Método para encontrar todos los Turnos
     public List<Turno> findTurnoEntities() {
         return findTurnoEntities(true, -1, -1);
     }
 
+    // Método para encontrar Turnos con límite de resultados y posición inicial
     public List<Turno> findTurnoEntities(int maxResults, int firstResult) {
         return findTurnoEntities(false, maxResults, firstResult);
     }
 
+    // Método privado para encontrar Turnos con opciones adicionales
     private List<Turno> findTurnoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
@@ -125,6 +127,7 @@ public class FiltrarTurnoJpaController {
         }
     }
 
+    // Método para encontrar un Turno por su ID
     public Turno findTurno(Long id) {
         EntityManager em = getEntityManager();
         try {
@@ -134,6 +137,7 @@ public class FiltrarTurnoJpaController {
         }
     }
 
+    // Método para obtener el número total de Turnos
     public int getTurnoCount() {
         EntityManager em = getEntityManager();
         try {
@@ -147,4 +151,3 @@ public class FiltrarTurnoJpaController {
         }
     }
 }
-

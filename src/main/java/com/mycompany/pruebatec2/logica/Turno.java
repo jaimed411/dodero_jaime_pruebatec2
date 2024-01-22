@@ -23,23 +23,24 @@ public class Turno implements Serializable {
 
     @Column(name = "descripcionTramite")
     private String descripcionTramite;
-    
 
     @Column(name = "estado")
     private String estado;
 
+    // Ciudadano asociado al turno (relaciÛn muchos a uno)
     @ManyToOne
     @JoinColumn(name = "ciudadano_dni")
     private Ciudadano ciudadano;
-    
+
+    // Hora asociada al turno
     @Column(name = "hora")
     private String hora;
 
-    
-    // Constructor sin par√°metros
+    // Constructor sin par·metros
     public Turno() {
     }
 
+    // Constructor con par·metros
     public Turno(int numero, Date fecha, String descripcionTramite, String estado, Ciudadano ciudadano) {
         this.numero = numero;
         this.fecha = fecha;
@@ -47,8 +48,6 @@ public class Turno implements Serializable {
         this.estado = estado;
         this.ciudadano = ciudadano;
     }
-    
-    
 
     // Getters y Setters
 
@@ -99,20 +98,18 @@ public class Turno implements Serializable {
     public void setCiudadano(Ciudadano ciudadano) {
         this.ciudadano = ciudadano;
     }
-    
-    public String getDescripcion() {
-        String descripcion = null;
-        return descripcion;
-    }
-    
+
     public String getHora() {
-    return hora;
-}
+        return hora;
+    }
 
     public void setHora(String hora) {
         this.hora = hora;
     }
- 
 
-    // Otros m√©todos seg√∫n las necesidades
+    public String getDescripcion() {
+        String descripcion = null; 
+        return descripcion;
+    }
+
 }

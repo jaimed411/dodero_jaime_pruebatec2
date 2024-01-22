@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.pruebatec2.persistencia;
 
 
@@ -13,12 +9,15 @@ import java.util.List;
 
 public class MostrarTurnoJpaController {
 
+    // Factoría de EntityManager para gestionar la persistencia
     private final EntityManagerFactory emf;
 
+    // Constructor que inicializa la factoría de EntityManager
     public MostrarTurnoJpaController() {
         emf = Persistence.createEntityManagerFactory("galeriaartePU");
     }
 
+    // Método para encontrar todas las entidades MostrarTurno
     public List<MostrarTurno> findMostrarTurnoEntities() {
         try {
             javax.persistence.EntityManager em = getEntityManager();
@@ -33,6 +32,7 @@ public class MostrarTurnoJpaController {
         }
     }
 
+    // Método privado para obtener un EntityManager
     private javax.persistence.EntityManager getEntityManager() {
         return emf.createEntityManager();
     }

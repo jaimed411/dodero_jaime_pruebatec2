@@ -15,18 +15,24 @@ public class MostrarTurnoSv extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Utilizar la ControladoraMostrarTurno para obtener todos los turnos
-        ControladoraMostrarTurno controladoraMostrarTurno = new ControladoraMostrarTurno();
-        List<MostrarTurno> todosLosTurnos = controladoraMostrarTurno.obtenerTodosLosTurnos();
+        try {
+            // Utilizar la ControladoraMostrarTurno para obtener todos los turnos
+            ControladoraMostrarTurno controladoraMostrarTurno = new ControladoraMostrarTurno();
+            List<MostrarTurno> todosLosTurnos = controladoraMostrarTurno.obtenerTodosLosTurnos();
 
-        // Imprimir información de depuración
-        System.out.println("Número de turnos recuperados: " + todosLosTurnos.size());
+            // Imprimir información de depuración
+            System.out.println("Número de turnos recuperados: " + todosLosTurnos.size());
 
-        // Establecer los resultados en la solicitud para que se muestren en el JSP
-        request.setAttribute("turnos", todosLosTurnos);
+            // Establecer los resultados en la solicitud para que se muestren en el JSP
+            request.setAttribute("turnos", todosLosTurnos);
 
-        // Redirigir a la página JSP
-        request.getRequestDispatcher("/mostrarTurnos.jsp").forward(request, response);
+            // Redirigir a la página JSP
+            request.getRequestDispatcher("/mostrarTurnos.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Manejar cualquier excepción y redirigir a una página de error si es necesario
+            request.setAttribute("error", "Error al obtener los turnos");
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
+        }
     }
-
 }

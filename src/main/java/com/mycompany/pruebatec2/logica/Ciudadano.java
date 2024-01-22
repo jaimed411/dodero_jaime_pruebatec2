@@ -1,7 +1,6 @@
 package com.mycompany.pruebatec2.logica;
 
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,26 +8,32 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ciudadanos", schema = "galeriaarte")  // Nombre de la tabla en la base de datos
+// Especificación del nombre de la tabla en la base de datos y del esquema (schema)
+@Table(name = "ciudadanos", schema = "galeriaarte")
 public class Ciudadano {
 
+    // Identificador único generado automáticamente
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Atributos de la entidad Ciudadano
     private String dni;
     private String nombre;
     private String apellidos;
     private int edad;
     private String telefono;
 
+    // Constructor vacio
     public Ciudadano(int dni1) {
     }
 
-    // Constructores
+    // Constructores de la clase
 
+    // Constructor utilizado para propósitos internos (no utilizado en el código proporcionado)
     public Ciudadano(String dni1, String nombre1, int edad1) {}
 
+    // Constructor principal utilizado para crear instancias de la clase Ciudadano
     public Ciudadano(String dni, String nombre, String apellidos, int edad, String telefono) {
         this.dni = dni;
         this.nombre = nombre;
@@ -37,7 +42,7 @@ public class Ciudadano {
         this.telefono = telefono;
     }
 
-    // MÃ©todos Getters y Setters
+    // Métodos Getters y Setters para acceder y modificar los atributos
 
     public String getDni() {
         return dni;
@@ -78,14 +83,15 @@ public class Ciudadano {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
+
+    // Método adicional que devuelve el nombre completo concatenando nombre y apellidos
     public String getNombreCompleto() {
         return nombre + " " + apellidos;
     }
     
+    // Constructor predeterminado necesario para JPA
     public Ciudadano() {
         // Constructor predeterminado
     }
-    
-    
 }
+

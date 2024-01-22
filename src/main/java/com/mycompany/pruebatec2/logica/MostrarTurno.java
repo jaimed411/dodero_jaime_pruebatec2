@@ -1,7 +1,6 @@
 package com.mycompany.pruebatec2.logica;
 
 
-
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,6 +13,7 @@ import java.util.Date;
 @Entity
 @Table(name = "turnos")
 public class MostrarTurno implements Serializable {
+
     @Id
     private Long id;
 
@@ -22,12 +22,14 @@ public class MostrarTurno implements Serializable {
     private Date fecha;
     private String numero;
 
+    // Ciudadano asociado al turno (relación muchos a uno)
     @ManyToOne
     @JoinColumn(name = "ciudadano_dni")
     private Ciudadano ciudadano;
 
-    // Add other fields, getters, and setters as needed
+    // Constructores, getters y setters
 
+    // Getter y setter para el identificador único
     public Long getId() {
         return id;
     }
@@ -35,6 +37,8 @@ public class MostrarTurno implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    // Getters y setters para los demás atributos
 
     public String getDescripcionTramite() {
         return descripcionTramite;

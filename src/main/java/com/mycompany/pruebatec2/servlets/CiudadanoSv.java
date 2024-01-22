@@ -16,35 +16,38 @@ import java.util.List;
 @WebServlet(name = "CiudadanoSv", urlPatterns = {"/ciudadano"})
 public class CiudadanoSv extends HttpServlet {
 
+    // Lista temporal de ciudadanos (podrÌa ser reemplazada por la base de datos)
     private List<Ciudadano> listaCiudadanos = new ArrayList<>();
 
+    // MÈtodo para manejar las solicitudes POST
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Manejar la l√≥gica de agregar un nuevo ciudadano
+        // LÛgica para agregar un nuevo ciudadano
         String dni = request.getParameter("dni");
         String nombre = request.getParameter("nombre");
         String apellidos = request.getParameter("apellidos");
         int edad = Integer.parseInt(request.getParameter("edad"));
         String telefono = request.getParameter("telefono");
 
+        // Crear un nuevo ciudadano
         Ciudadano nuevoCiudadano = new Ciudadano(dni, nombre, apellidos, edad, telefono);
 
-        // Utiliza la ControladoraPersistencia para agregar el ciudadano a la base de datos
+        // Utilizar la ControladoraPersistencia para agregar el ciudadano a la base de datos
         ControladoraPersistencia controladoraPersistencia = new ControladoraPersistencia();
         controladoraPersistencia.agregarCiudadano(nuevoCiudadano);
 
-        // Redireccionar o mostrar un mensaje de √©xito
+        // Redireccionar o mostrar un mensaje de Èxito
         response.sendRedirect(request.getContextPath() + "/bienvenida.jsp");
-        
-
     }
 
-
+    // MÈtodo para manejar las solicitudes GET
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Manejar la l√≥gica de consultar ciudadanos por DNI
+        // LÛgica para consultar ciudadanos por DNI
         String consultaDNI = request.getParameter("consultaDNI");
 
         if (consultaDNI != null && !consultaDNI.isEmpty()) {
-            Ciudadano ciudadanoEncontrado = buscarCiudadanoPorDNI(consultaDNI);
+            // Utilizar la ControladoraPersistencia para buscar el ciudadano por DNI en la base de datos
+            ControladoraPersistencia controladoraPersistencia = new ControladoraPersistencia();
+            Ciudadano ciudadanoEncontrado = controladoraPersistencia.buscarCiudadanoPorDNI(consultaDNI);
 
             if (ciudadanoEncontrado != null) {
                 // Ciudadano encontrado, redirigir al panel de control
@@ -55,25 +58,10 @@ public class CiudadanoSv extends HttpServlet {
                 request.getRequestDispatcher("/YaSoyCiudadano.jsp").forward(request, response);
             }
         } else {
-            // Manejar la l√≥gica de listar ciudadanos
-            // Puedes pasar la lista de ciudadanos a la p√°gina JSP para mostrarla
+            // LÛgica para listar todos los ciudadanos (puedes obtener la lista desde la base de datos)
+            // Puedes pasar la lista de ciudadanos a la p·gina JSP para mostrarla
             request.setAttribute("ciudadanos", listaCiudadanos);
             request.getRequestDispatcher("/listaCiudadanos.jsp").forward(request, response);
         }
     }
-
-
-    private Ciudadano buscarCiudadanoPorDNI(String dni) {
-        for (Ciudadano ciudadano : listaCiudadanos) {
-            if (ciudadano.getDni().equals(dni)) {
-                return ciudadano;
-            }
-        }
-        return null; // Retorna null si no se encuentra el ciudadano con el DNI dado
-    }
-    
-    
-
-
-    
 }

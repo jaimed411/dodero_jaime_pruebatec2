@@ -67,12 +67,10 @@ public class TurnoSv extends HttpServlet {
 
     private Date parsearFecha(String fechaStr) {
         // Implementa la lógica para parsear la fecha según el formato que necesites
-        // Aquí se muestra una implementación simple que utiliza SimpleDateFormat
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             return sdf.parse(fechaStr);
         } catch (ParseException e) {
-            // Maneja la excepción según tus necesidades
             e.printStackTrace();
             return null;
         }

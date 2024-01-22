@@ -1,8 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.pruebatec2.persistencia;
+
 
 import com.mycompany.pruebatec2.exceptions.NonexistentEntityException;
 import com.mycompany.pruebatec2.exceptions.PreexistingEntityException;
@@ -17,21 +14,23 @@ import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-/**
- *
- * @author Jaime
- */
+
 public class CiudadanoJpaController implements Serializable {
 
+    // Factoría de EntityManager para gestionar la persistencia
+    private EntityManagerFactory emf = null;
+
+    // Constructor que recibe la factoría de EntityManager
     public CiudadanoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    private EntityManagerFactory emf = null;
 
+    // Obtiene un EntityManager
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
+    // Crea un nuevo registro de Ciudadano
     public void create(Ciudadano ciudadano) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
@@ -51,6 +50,7 @@ public class CiudadanoJpaController implements Serializable {
         }
     }
 
+    // Actualiza un registro de Ciudadano
     public void edit(Ciudadano ciudadano) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
@@ -74,6 +74,7 @@ public class CiudadanoJpaController implements Serializable {
         }
     }
 
+    // Elimina un registro de Ciudadano
     public void destroy(String id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -95,14 +96,17 @@ public class CiudadanoJpaController implements Serializable {
         }
     }
 
+    // Obtiene una lista de todos los registros de Ciudadano
     public List<Ciudadano> findCiudadanoEntities() {
         return findCiudadanoEntities(true, -1, -1);
     }
 
+    // Obtiene una lista de registros de Ciudadano con paginación
     public List<Ciudadano> findCiudadanoEntities(int maxResults, int firstResult) {
         return findCiudadanoEntities(false, maxResults, firstResult);
     }
 
+    // Método privado para obtener la lista de registros de Ciudadano con o sin paginación
     private List<Ciudadano> findCiudadanoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
@@ -119,6 +123,7 @@ public class CiudadanoJpaController implements Serializable {
         }
     }
 
+    // Obtiene un registro de Ciudadano por su ID
     public Ciudadano findCiudadano(String id) {
         EntityManager em = getEntityManager();
         try {
@@ -128,6 +133,7 @@ public class CiudadanoJpaController implements Serializable {
         }
     }
 
+    // Obtiene la cantidad total de registros de Ciudadano
     public int getCiudadanoCount() {
         EntityManager em = getEntityManager();
         try {
@@ -140,11 +146,9 @@ public class CiudadanoJpaController implements Serializable {
             em.close();
         }
     }
-    
+
+    // Constructor sin parámetros que inicializa la factoría de EntityManager
     public CiudadanoJpaController() {
-      emf = Persistence.createEntityManagerFactory("jpaPU");
+        emf = Persistence.createEntityManagerFactory("jpaPU");
     }
-    
-    
-    
 }

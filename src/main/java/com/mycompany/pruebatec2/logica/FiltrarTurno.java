@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.pruebatec2.logica;
 
 
@@ -18,26 +14,29 @@ import javax.persistence.TemporalType;
 @Entity
 public class FiltrarTurno implements Serializable {
 
+    // Identificador único del filtro de turno
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descripcionTramite;
     private String estado;
-    
+
     @Temporal(TemporalType.DATE)
     private Date fecha;
-
     private String hora;
     private String numero;
 
+    // Ciudadano asociado al filtro (relación muchos a uno)
     @ManyToOne
     private Ciudadano ciudadano;
 
-    // Constructor, getters y setters
+    // Constructores, getters y setters
 
+    // Constructor por defecto
     public FiltrarTurno() {
     }
 
+    // Constructor con parámetros para inicializar todos los atributos
     public FiltrarTurno(String descripcionTramite, String estado, Date fecha, String hora, String numero, Ciudadano ciudadano) {
         this.descripcionTramite = descripcionTramite;
         this.estado = estado;
@@ -47,6 +46,7 @@ public class FiltrarTurno implements Serializable {
         this.ciudadano = ciudadano;
     }
 
+    // Getter y setter para el identificador único
     public Long getId() {
         return id;
     }
@@ -54,6 +54,8 @@ public class FiltrarTurno implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    // Getters y setters para los demás atributos
 
     public String getDescripcionTramite() {
         return descripcionTramite;

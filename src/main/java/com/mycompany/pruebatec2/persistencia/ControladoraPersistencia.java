@@ -18,12 +18,15 @@ import javax.persistence.TypedQuery;
 
 public class ControladoraPersistencia {
 
+    // Factoría de EntityManager para gestionar la persistencia
     private final EntityManagerFactory emf;
 
+    // Constructor que inicializa la factoría de EntityManager
     public ControladoraPersistencia() {
-        emf = Persistence.createEntityManagerFactory("galeriaartePU"); // Ajusta el nombre de la unidad de persistencia segÃºn tu configuraciÃ³n
+        emf = Persistence.createEntityManagerFactory("galeriaartePU"); // Ajusta el nombre de la unidad de persistencia según tu configuración
     }
 
+    // Método para agregar un Ciudadano a la base de datos mediante JPA
     public void agregarCiudadano(Ciudadano ciudadano) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -35,6 +38,7 @@ public class ControladoraPersistencia {
         }
     }
 
+    // Método para verificar la existencia de un Ciudadano por DNI mediante JPA
     public boolean existeCiudadanoPorDNI(String dni) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -46,18 +50,16 @@ public class ControladoraPersistencia {
         }
     }
 
+    // Método para cerrar la factoría de EntityManager
     public void cerrarEntityManagerFactory() {
         if (emf != null && emf.isOpen()) {
             emf.close();
         }
     }
-    
-    
-    // Método para agregar un turno a la base de datos
+
+    // Método para agregar un Turno a la base de datos mediante SQL
     public void agregarTurno(Turno turno) {
-        // Establece la conexión a la base de datos (ajusta según tu configuración)
         try (Connection conn = obtenerConexion()) {
-            // Consulta SQL para insertar un nuevo turno
             String sql = "INSERT INTO turnos (numero, fecha, descripcionTramite, estado, ciudadano_dni, hora) VALUES (?, ?, ?, ?, ?, ?)";
 
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -68,7 +70,7 @@ public class ControladoraPersistencia {
                 stmt.setString(3, turno.getDescripcionTramite());
                 stmt.setString(4, turno.getEstado());
                 stmt.setString(5, turno.getCiudadano().getDni());
-                stmt.setString(6, turno.getHora()); // Nueva línea para la hora
+                stmt.setString(6, turno.getHora());
 
                 stmt.executeUpdate();
             }
@@ -83,17 +85,12 @@ public class ControladoraPersistencia {
         return random.nextInt(100) + 1;
     }
 
-
-    
-    
     // Método para obtener una conexión a la base de datos
     private Connection obtenerConexion() throws SQLException {
-        // Configura los detalles de la conexión (ajusta según tu base de datos)
         String url = "jdbc:mysql://localhost:3306/tu_basede_datos";
         String usuario = "tu_usuario";
         String contraseña = "tu_contraseña";
 
-        // Intenta establecer la conexión
         try {
             return DriverManager.getConnection(url, usuario, contraseña);
         } catch (SQLException e) {
@@ -101,54 +98,45 @@ public class ControladoraPersistencia {
         }
     }
 
-    
-    
+    // Método para buscar un Ciudadano por DNI mediante JPA
     public Ciudadano buscarCiudadanoPorDNI(String dniStr) {
-    EntityManager em = emf.createEntityManager();
-    try {
-        TypedQuery<Ciudadano> query = em.createQuery("SELECT c FROM Ciudadano c WHERE c.dni = :dni", Ciudadano.class);
-        query.setParameter("dni", dniStr);
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Ciudadano> query = em.createQuery("SELECT c FROM Ciudadano c WHERE c.dni = :dni", Ciudadano.class);
+            query.setParameter("dni", dniStr);
 
-        List<Ciudadano> resultados = query.getResultList();
-        if (!resultados.isEmpty()) {
-            return resultados.get(0);
-        } else {
-            return null; // Retorna null si no se encuentra el ciudadano con el DNI dado
+            List<Ciudadano> resultados = query.getResultList();
+            if (!resultados.isEmpty()) {
+                return resultados.get(0);
+            } else {
+                return null; // Retorna null si no se encuentra el ciudadano con el DNI dado
+            }
+        } finally {
+            em.close();
         }
-    } finally {
-        em.close();
     }
-    
-    
-    
-    
-}
 
-
-public List<Turno> obtenerTurnosPorFecha(Date fecha) {
-    EntityManager em = emf.createEntityManager();
-    try {
-        TypedQuery<Turno> query = em.createQuery("SELECT t FROM Turno t WHERE t.fecha = :fecha", Turno.class);
-        query.setParameter("fecha", fecha);
-        return query.getResultList();
-    } finally {
-        em.close();
+    // Método para obtener una lista de Turnos por fecha mediante JPA
+    public List<Turno> obtenerTurnosPorFecha(Date fecha) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Turno> query = em.createQuery("SELECT t FROM Turno t WHERE t.fecha = :fecha", Turno.class);
+            query.setParameter("fecha", fecha);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
     }
-}
 
-// Nuevo método para filtrar turnos por fecha
-public List<Turno> filtrarTurnosPorFecha(Date fecha) {
-    EntityManager em = emf.createEntityManager();
-    try {
-        TypedQuery<Turno> query = em.createQuery("SELECT t FROM Turno t WHERE t.fecha = :fecha", Turno.class);
-        query.setParameter("fecha", fecha);
-        return query.getResultList();
-    } finally {
-        em.close();
+    // Nuevo método para filtrar Turnos por fecha mediante JPA
+    public List<Turno> filtrarTurnosPorFecha(Date fecha) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Turno> query = em.createQuery("SELECT t FROM Turno t WHERE t.fecha = :fecha", Turno.class);
+            query.setParameter("fecha", fecha);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
     }
-}
-
-
-
-    
 }

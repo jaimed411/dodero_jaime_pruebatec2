@@ -1,10 +1,12 @@
 <%@page import="com.mycompany.pruebatec2.logica.Ciudadano"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Formulario Ciudadano - Galería de Arte</title>
+    <!-- Se incluye el estilo de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cyborg/bootstrap.min.css">
     <style>
         body {
@@ -20,13 +22,13 @@
         }
 
         .custom-form {
-            max-width: 400px; /* Ancho máximo del formulario */
-            margin: 0 auto; /* Centrar el formulario en la pantalla */
+            max-width: 400px; 
+            margin: 0 auto; 
         }
 
         .form-group {
-            width: 100%; /* Ancho del 100% para cajas de entrada */
-            margin-bottom: 10px; /* Espacio entre las cajas del formulario */
+            width: 100%; 
+            margin-bottom: 10px; 
         }
 
         .btn-container {
@@ -35,36 +37,49 @@
     </style>
 </head>
 <body>
+    <!-- Contenedor principal -->
     <div class="container mt-4">
+        <!-- Formulario para agregar información del ciudadano -->
         <form action="${pageContext.request.contextPath}/ciudadano" method="post" class="custom-form">
+            <!-- Campo para el DNI -->
             <div class="form-group">
                 <label for="dni">DNI:</label>
                 <input type="text" class="form-control" id="dni" name="dni" required>
             </div>
+
+            <!-- Campo para el nombre -->
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" required>
             </div>
+
+            <!-- Campo para los apellidos -->
             <div class="form-group">
                 <label for="apellidos">Apellidos:</label>
                 <input type="text" class="form-control" id="apellidos" name="apellidos" required>
             </div>
+
+            <!-- Campo para la edad -->
             <div class="form-group">
                 <label for="edad">Edad:</label>
                 <input type="number" class="form-control" id="edad" name="edad" required>
             </div>
+
+            <!-- Campo para el teléfono -->
             <div class="form-group">
                 <label for="telefono">Teléfono:</label>
                 <input type="text" class="form-control" id="telefono" name="telefono" required>
             </div>
-            <p>
-                
-            </p>
+
+            <!-- Párrafo vacío, parece que no contiene información -->
+
+            <!-- Contenedor para los botones de agregar y volver -->
             <div class="btn-container">
                 <button type="submit" class="btn btn-primary">Agregar Ciudadano</button>
                 <a href="${pageContext.request.contextPath}/registroCiudadano.jsp" class="btn btn-secondary">Volver</a>
             </div>
         </form>
+        <!-- Línea horizontal como separador -->
         <hr>
     </div>
 

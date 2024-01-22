@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Mostrar Todos los Turnos</title>
+    <!-- Se incluye el estilo de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cyborg/bootstrap.min.css">
     <style>
         .container {
@@ -21,12 +22,15 @@
 </head>
 <body>
 
+<!-- Contenedor principal -->
 <div class="container mt-4">
+    <!-- Título de la página -->
     <h2>Mostrar Todos los Turnos</h2>
 
     <!-- Mostrar todos los turnos en una tabla -->
     <table class="table mt-4">
         <thead>
+            <!-- Encabezados de la tabla -->
             <tr>
                 <th>ID</th>
                 <th>Descripción Trámite</th>
@@ -37,6 +41,7 @@
             </tr>
         </thead>
         <tbody>
+            <!-- Iterar sobre la lista de turnos y mostrar información en la tabla -->
             <c:forEach var="turno" items="${turnos}">
                 <tr>
                     <td>${turno.id}</td>
@@ -50,6 +55,7 @@
         </tbody>
     </table>
 
+    <!-- Botón para volver al panel de control -->
     <div class="btn-container">
         <a href="${pageContext.request.contextPath}/panelControl.jsp" class="btn btn-secondary">Volver</a>
     </div>

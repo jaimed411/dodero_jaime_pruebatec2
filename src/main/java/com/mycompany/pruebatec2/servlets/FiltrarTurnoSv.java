@@ -40,6 +40,8 @@ public class FiltrarTurnoSv extends HttpServlet {
         } catch (ParseException e) {
             e.printStackTrace();
             // Manejar el error de parseo de fecha según tus necesidades
+            request.setAttribute("error", "Error al procesar la fecha");
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
     }
 }
