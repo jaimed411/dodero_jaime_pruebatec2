@@ -8,6 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Filtrar Turnos por Fecha</title>
+    <!-- Se incluye el estilo de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cyborg/bootstrap.min.css">
     <style>
         body {
@@ -23,32 +24,43 @@
         }
 
         .custom-form {
-            max-width: 400px; /* Ancho máximo del formulario */
-            margin: 0 auto; /* Centrar el formulario en la pantalla */
+            max-width: 400px; 
+            margin: 0 auto;
         }
 
         .form-group {
-            width: 100%; /* Ancho del 100% para cajas de entrada */
-            margin-bottom: 10px; /* Espacio entre las cajas del formulario */
+            width: 100%; 
+            margin-bottom: 10px; 
         }
 
         .btn-container {
             text-align: center;
+        }
+
+        .custom-btn {
+            margin-top: 10px; 
+        }
+
+        .centered-heading {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
 <div class="container mt-4">
+    <!-- Encabezado -->
     <h2 class="centered-heading">Filtrar Turnos por Fecha</h2>
 
     <!-- Formulario para filtrar por fecha y estado -->
     <form action="${pageContext.request.contextPath}/filtrarTurnos" method="post" class="custom-form">
+        <!-- Campo para la fecha -->
         <div class="form-group">
             <label for="fecha">Qué día quieres filtrar?</label>
             <input type="date" class="form-control" id="fecha" name="fecha" required>
         </div>
 
+        <!-- Campo para el estado -->
         <div class="form-group">
             <label for="estado">En espera o Ya atendido?</label>
             <select class="form-control" id="estado" name="estado">
@@ -57,6 +69,7 @@
             </select>
         </div>
 
+        <!-- Botón para enviar el formulario -->
         <button type="submit" class="btn btn-primary custom-btn">Filtrar y mostrar</button>
     </form>
 
@@ -74,10 +87,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Iterar sobre la lista de turnos y mostrar información en la tabla -->
                     <% for (Turno turno : (List<Turno>) request.getAttribute("turnos")) { %>
                         <tr>
                             <td><%= turno.getDescripcionTramite() %></td>
                             <td><%= turno.getEstado() %></td>
+                            <!-- Formatear la fecha usando SimpleDateFormat -->
                             <td><%= new SimpleDateFormat("EEE MMM dd yyyy").format(turno.getFecha()) %></td>
                             <td><%= turno.getNumero() %></td>
                             <td><%= turno.getCiudadano().getDni() %></td>
@@ -88,6 +103,7 @@
         <% } %>
     </table>
 
+    <!-- Volver al panel de control -->
     <div class="btn-container">
         <a href="${pageContext.request.contextPath}/panelControl.jsp" class="btn btn-secondary">Volver</a>
     </div>

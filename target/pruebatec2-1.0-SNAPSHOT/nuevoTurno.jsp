@@ -9,6 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Nuevo Turno - Galería de Arte</title>
+    <!-- Se incluye el estilo de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cyborg/bootstrap.min.css">
     
     <style>
@@ -25,12 +26,12 @@
         }
 
         .custom-form {
-            max-width: 400px; /* Ancho máximo del formulario */
-            margin: 0 auto; /* Centrar el formulario en la pantalla */
+            max-width: 400px; 
+            margin: 0 auto; 
         }
 
         .form-group {
-            width: 100%; /* Ancho del 100% para cajas de entrada */
+            width: 100%; 
         }
     </style>
     
@@ -38,19 +39,22 @@
 <body>
 
     <div class="container mt-4">
+        <!-- Título del formulario -->
         <h2>Reservar Exposición</h2>
 
         <!-- Formulario para agregar nuevo turno -->
         <form action="${pageContext.request.contextPath}/turno" method="post" class="custom-form">
+            <!-- Campo para el DNI del ciudadano -->
             <div class="form-group">
                 <label for="dni">Tu DNI:</label>
                 <input type="text" class="form-control" id="dni" name="dni" required>
             </div>
 
-            <!-- Lista de turnos ficticios -->
+            <!-- Lista de exposiciones disponibles -->
             <div class="form-group">
                 <label for="turno">Seleccionar Exposición:</label>
                 <select class="form-control" id="turno" name="turno" required>
+                    <!-- Opciones de exposiciones -->
                     <option value="Fragmentos de un Color Inacabado - Rafael Herrera">Fragmentos de un Color Inacabado - Rafael Herrera</option>
                     <option value="Resonancias Urbanas - Valentina Ramos">Resonancias Urbanas - Valentina Ramos</option>
                     <option value="Metamorfosis Cromatica - Javier Medina">Metamorfosis Cromatica - Javier Medina</option>
@@ -62,15 +66,17 @@
                 </select>
             </div>
             
+            <!-- Campo para la fecha de la exposición -->
             <div class="form-group">
                 <label for="fechaConsulta">Para cuando?</label>
                 <input type="date" class="form-control" id="fecha" name="fecha" required>
             </div>
 
-            <!-- Lista de horarios ficticios -->
+            <!-- Lista de horarios disponibles -->
             <div class="form-group">
                 <label for="hora">A qué hora?</label>
                 <select class="form-control" id="hora" name="hora" required>
+                    <!-- Opciones de horarios -->
                     <option value="08:00 - 08:45">08:00 - 08:45</option>
                     <option value="08:45 - 09:30">08:45 - 09:30</option>
                     <option value="09:30 - 10:15">09:30 - 10:15</option>
@@ -81,6 +87,7 @@
                 </select>
             </div>
 
+            <!-- Botones para enviar el formulario y volver -->
             <button type="submit" class="btn btn-primary">Reservar</button>
             <a href="${pageContext.request.contextPath}/panelControl.jsp" class="btn btn-secondary">Volver</a>
         </form>
